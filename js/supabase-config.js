@@ -7,8 +7,8 @@
    key ini.
    ========================================================== */
 
-const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://clzjrjkfjaohymccwyrg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsempyamtmamFvaHltY2N3eXJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2NDAwMjgsImV4cCI6MjEwMjIxNjAyOH0.moMntrTLXABoS_YlA7XqbIFjt8YU7tgt2hd0_aO9TKA';
 
 /* window.supabase disuntik oleh CDN:
    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -16,8 +16,8 @@ const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
 let supabaseClient = null;
 const isSupabaseConfigured =
   typeof window.supabase !== 'undefined' &&
-  SUPABASE_URL.indexOf('YOUR_PROJECT_ID') === -1 &&
-  SUPABASE_ANON_KEY.indexOf('YOUR_SUPABASE_ANON_KEY') === -1;
+  SUPABASE_URL.indexOf('clzjrjkfjaohymccwyrg') === -1 &&
+  SUPABASE_ANON_KEY.indexOf('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsempyamtmamFvaHltY2N3eXJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2NDAwMjgsImV4cCI6MjEwMjIxNjAyOH0.moMntrTLXABoS_YlA7XqbIFjt8YU7tgt2hd0_aO9TKA') === -1;
 
 if (typeof window.supabase !== 'undefined') {
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
