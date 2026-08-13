@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saran MPK - SMK Negeri 1 Bantul</title>
+  <meta name="description" content="Kotak saran dan aspirasi siswa untuk MPK SMK Negeri 1 Bantul.">
+  <link rel="icon" type="image/png" href="assets/icons/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="brand">
+        <img src="assets/icons/logo.png" alt="Logo MPK SMKN 1 Bantul" class="brand-logo">
+        <span>SMKN 1 Bantul</span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="profil.html" class="nav-link">Profil</a>
+        <a href="berita.html" class="nav-link">Berita</a>
+        <a href="agenda.html" class="nav-link">Agenda</a>
+        <a href="diskusi.html" class="nav-link">Diskusi</a>
+        <a href="unduhan.html" class="nav-link">Unduhan</a>
+        <a href="saran.html" class="nav-link active">Saran</a>
+        <a href="kontak.html" class="nav-link">Kontak</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme"></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle Navigation">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" style="min-height: 40vh;">
+    <div class="container">
+      <div class="hero-content reveal">
+        <span class="badge badge-primary" style="margin-bottom: 1rem;">Kotak Aspirasi</span>
+        <h1>Saran & Aspirasi</h1>
+        <p>Sampaikan pendapat, kritik, atau masukan Anda agar MPK dapat menindaklanjuti kebutuhan dan perbaikan di sekolah.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="card reveal">
+        <div class="card-body">
+          <form id="form-saran">
+            <div class="form-group">
+              <label class="form-label" for="saran-nama">Nama</label>
+              <input class="form-control" id="saran-nama" type="text" placeholder="Masukkan nama Anda">
+            </div>
+            <div class="form-group" style="display:flex; align-items:center; gap:0.75rem;">
+              <input id="saran-anon" type="checkbox">
+              <label for="saran-anon" class="form-label" style="margin:0;">Kirim sebagai anonim</label>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="saran-kelas">Kelas</label>
+              <input class="form-control" id="saran-kelas" type="text" placeholder="Contoh: XI TKJ 1" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="saran-kategori">Kategori</label>
+              <select class="form-control" id="saran-kategori">
+                <option value="Kritik">Kritik</option>
+                <option value="Saran">Saran</option>
+                <option value="Aspirasi">Aspirasi</option>
+                <option value="Pengaduan">Pengaduan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="saran-isi">Isi Saran</label>
+              <textarea class="form-control" id="saran-isi" rows="6" placeholder="Tuliskan saran atau aspirasi Anda..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Kirim Saran</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="grid-3">
+        <div>
+          <h3 style="margin-bottom: 1rem;">MPK SMKN 1 Bantul</h3>
+          <p style="color: var(--text-muted);">"Beraspirasi, Berrepresentasi, Berintegritas."</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 1rem;">Tautan Cepat</h4>
+          <ul style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><a href="profil.html" style="color: var(--text-muted);">Profil Organisasi</a></li>
+            <li><a href="berita.html" style="color: var(--text-muted);">Berita Terkini</a></li>
+            <li><a href="saran.html" style="color: var(--text-muted);">Kotak Aspirasi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 1rem;">Kontak</h4>
+          <p style="color: var(--text-muted);">Jl. Sabdodadi, Keyongan, Sabdodadi, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55715</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MPK SMK Negeri 1 Bantul. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/saran.js"></script>
+</body>
+</html>
