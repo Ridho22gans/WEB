@@ -16,8 +16,8 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 let supabaseClient = null;
 const isSupabaseConfigured =
   typeof window.supabase !== 'undefined' &&
-  SUPABASE_URL.indexOf('https://clzjrjkfjaohymccwyrg.supabase.co') === -1 &&
-  SUPABASE_ANON_KEY.indexOf('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsempyamtmamFvaHltY2N3eXJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2NDAwMjgsImV4cCI6MjEwMjIxNjAyOH0.moMntrTLXABoS_YlA7XqbIFjt8YU7tgt2hd0_aO9TKA') === -1;
+  SUPABASE_URL.indexOf('YOUR_PROJECT_ID') === -1 &&
+  SUPABASE_ANON_KEY.indexOf('YOUR_SUPABASE_ANON_KEY') === -1;
 
 if (typeof window.supabase !== 'undefined') {
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
