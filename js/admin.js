@@ -137,14 +137,15 @@ function bindBeritaForm() {
         payload.image = await MpkStorage.upload('berita', file);
       }
 
+      let result;
       if (editingBeritaId) {
-        await MpkDB.update('berita', editingBeritaId, payload);
-        showToast('Berita berhasil diperbarui!', 'success');
+        result = await MpkDB.update('berita', editingBeritaId, payload);
       } else {
         if (!payload.image) payload.image = 'assets/icons/logo.png';
-        await MpkDB.insert('berita', payload);
-        showToast('Berita berhasil ditambahkan!', 'success');
+        result = await MpkDB.insert('berita', payload);
       }
+      if (result.error) throw new Error(result.error.message);
+      showToast(editingBeritaId ? 'Berita berhasil diperbarui!' : 'Berita berhasil ditambahkan!', 'success');
 
       resetBeritaForm();
       loadBerita();
@@ -223,6 +224,8 @@ function bindAgendaForm() {
   const form = document.getElementById('form-agenda');
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const submitBtn = document.getElementById('agenda-submit-btn');
+    submitBtn.disabled = true;
     const payload = {
       title: document.getElementById('agenda-title').value,
       event_date: document.getElementById('agenda-date').value,
@@ -230,15 +233,22 @@ function bindAgendaForm() {
       description: document.getElementById('agenda-description').value
     };
 
-    if (editingAgendaId) {
-      await MpkDB.update('agenda', editingAgendaId, payload);
-      showToast('Agenda diperbarui!', 'success');
-    } else {
-      await MpkDB.insert('agenda', payload);
-      showToast('Agenda ditambahkan!', 'success');
+    try {
+      let result;
+      if (editingAgendaId) {
+        result = await MpkDB.update('agenda', editingAgendaId, payload);
+      } else {
+        result = await MpkDB.insert('agenda', payload);
+      }
+      if (result.error) throw new Error(result.error.message);
+      showToast(editingAgendaId ? 'Agenda diperbarui!' : 'Agenda ditambahkan!', 'success');
+      resetAgendaForm();
+      loadAgenda();
+    } catch (err) {
+      showToast('Gagal menyimpan agenda: ' + err.message, 'danger');
+    } finally {
+      submitBtn.disabled = false;
     }
-    resetAgendaForm();
-    loadAgenda();
   });
 
   document.getElementById('agenda-cancel-edit')?.addEventListener('click', resetAgendaForm);
@@ -325,13 +335,14 @@ function bindPengurusForm() {
         payload.foto_url = await MpkStorage.upload('pengurus', file);
       }
 
+      let result;
       if (editingPengurusId) {
-        await MpkDB.update('pengurus', editingPengurusId, payload);
-        showToast('Data pengurus diperbarui!', 'success');
+        result = await MpkDB.update('pengurus', editingPengurusId, payload);
       } else {
-        await MpkDB.insert('pengurus', payload);
-        showToast('Anggota pengurus ditambahkan!', 'success');
+        result = await MpkDB.insert('pengurus', payload);
       }
+      if (result.error) throw new Error(result.error.message);
+      showToast(editingPengurusId ? 'Data pengurus diperbarui!' : 'Anggota pengurus ditambahkan!', 'success');
       resetPengurusForm();
       loadPengurus();
     } catch (err) {
@@ -511,12 +522,13 @@ function bindUnduhanForm() {
     submitBtn.textContent = 'Mengunggah...';
     try {
       const fileUrl = await MpkStorage.upload('unduhan', file);
-      await MpkDB.insert('unduhan', {
+      const result = await MpkDB.insert('unduhan', {
         title: document.getElementById('unduhan-title').value,
         description: document.getElementById('unduhan-description').value,
         file_url: fileUrl,
         file_name: file.name
       });
+      if (result.error) throw new Error(result.error.message);
       showToast('Dokumen berhasil diunggah!', 'success');
       form.reset();
       loadUnduhan();
