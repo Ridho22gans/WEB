@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil MPK - SMK Negeri 1 Bantul</title>
+  <meta name="description" content="Profil resmi Majelis Perwakilan Kelas (MPK) SMK Negeri 1 Bantul.">
+  <link rel="icon" type="image/png" href="assets/icons/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar Header -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="brand">
+        <img src="assets/icons/logo.png" alt="Logo MPK SMKN 1 Bantul" class="brand-logo">
+        <span>SMKN 1 Bantul</span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="profil.html" class="nav-link active">Profil</a>
+        <a href="berita.html" class="nav-link">Berita</a>
+        <a href="agenda.html" class="nav-link">Agenda</a>
+        <a href="diskusi.html" class="nav-link">Diskusi</a>
+        <a href="unduhan.html" class="nav-link">Unduhan</a>
+        <a href="saran.html" class="nav-link">Saran</a>
+        <a href="kontak.html" class="nav-link">Kontak</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme"></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section Profil -->
+  <section class="hero" style="min-height: 40vh;">
+    <div class="container">
+      <div class="hero-content reveal">
+        <span class="badge badge-primary" style="margin-bottom: 1rem;">Tentang Kami</span>
+        <h1>Profil Organisasi</h1>
+        <p>Mengenal lebih dekat visi, misi, dan struktur kepengurusan Majelis Perwakilan Kelas SMK Negeri 1 Bantul.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visi & Misi Section -->
+  <section>
+    <div class="container">
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-body">
+            <span class="badge badge-primary" style="align-self: flex-start; margin-bottom: 1rem;">Visi</span>
+            <h3 class="card-title">Visi MPK SMKN 1 Bantul</h3>
+            <p class="card-text">
+              Mewujudkan Majelis Perwakilan Kelas sebagai lembaga legislatif siswa yang aspiratif, kritis, profesional, dan berintegritas tinggi demi mendukung terciptanya lingkungan sekolah yang demokratis dan berprestasi.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-body">
+            <span class="badge badge-primary" style="align-self: flex-start; margin-bottom: 1rem;">Misi</span>
+            <h3 class="card-title">Misi MPK SMKN 1 Bantul</h3>
+            <ul style="color: var(--text-muted); padding-left: 1.2rem; list-style-type: disc;">
+              <li>Menampung dan menyalurkan aspirasi siswa secara efektif dan transparan.</li>
+              <li>Mengawasi serta mengevaluasi kinerja OSIS dan organisasi kesiswaan lainnya secara objektif.</li>
+              <li>Membangun komunikasi yang harmonis antara siswa, organisasi, dan pihak sekolah.</li>
+              <li>Menumbuhkan nilai-nilai demokrasi dan kepemimpinan di lingkungan SMK Negeri 1 Bantul.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pengurus / Struktur Section -->
+  <section style="background-color: var(--bg-surface);">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Struktur Kepengurusan</h2>
+        <p>Anggota inti pengurus MPK SMK Negeri 1 Bantul</p>
+      </div>
+
+      <!-- Kontainer Pengurus (diisi otomatis oleh js/profil.js dari assets/image/) -->
+      <div id="pengurus-container" class="grid-4">
+        <noscript>Aktifkan JavaScript untuk melihat foto pengurus.</noscript>
+      </div>
+    </div>
+  </section>
+
+  <!-- Template untuk Render Dinamis Anggota (Jika dibutuhkan di JS nanti) -->
+  <template id="tpl-pengurus-card">
+    <div class="card">
+      <div class="card-body" style="text-align: center;">
+        <div class="pengurus-avatar" style="width: 80px; height: 80px; background: var(--border-color); border-radius: 50%; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; color: var(--primary);"></div>
+        <h3 class="card-title pengurus-nama" style="font-size: 1.1rem; margin-bottom: 0.2rem;"></h3>
+        <span class="badge badge-primary pengurus-jabatan" style="margin-bottom: 0.8rem;"></span>
+        <p class="card-text pengurus-desc" style="font-size: 0.85rem;"></p>
+      </div>
+    </div>
+  </template>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="grid-3">
+        <div>
+          <h3 style="margin-bottom: 1rem;">MPK SMKN 1 Bantul</h3>
+          <p style="color: var(--text-muted);">"Beraspirasi, Berrepresentasi, Berintegritas."</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 1rem;">Tautan Cepat</h4>
+          <ul style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><a href="profil.html" style="color: var(--text-muted);">Profil Organisasi</a></li>
+            <li><a href="berita.html" style="color: var(--text-muted);">Berita Terkini</a></li>
+            <li><a href="saran.html" style="color: var(--text-muted);">Kotak Aspirasi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 1rem;">Kontak</h4>
+          <p style="color: var(--text-muted);">Jl. Sabdodadi, Keyongan, Sabdodadi, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55715</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MPK SMK Negeri 1 Bantul. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Global -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/profil.js"></script>
+</body>
+</html>

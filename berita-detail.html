@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Berita MPK</title>
+  <meta name="description" content="Detail berita MPK SMK Negeri 1 Bantul.">
+  <link rel="icon" type="image/png" href="assets/icons/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="brand">
+        <img src="assets/icons/logo.png" alt="Logo MPK SMKN 1 Bantul" class="brand-logo">
+        <span>SMKN 1 Bantul</span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="profil.html" class="nav-link">Profil</a>
+        <a href="berita.html" class="nav-link active">Berita</a>
+        <a href="agenda.html" class="nav-link">Agenda</a>
+        <a href="diskusi.html" class="nav-link">Diskusi</a>
+        <a href="unduhan.html" class="nav-link">Unduhan</a>
+        <a href="saran.html" class="nav-link">Saran</a>
+        <a href="kontak.html" class="nav-link">Kontak</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme"></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle Navigation">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
+    <a href="berita.html" class="btn btn-secondary" style="margin-bottom: 1.5rem;">&larr; Kembali ke Berita</a>
+    <article class="card reveal" id="berita-detail-card">
+      <div class="card-body" style="padding: 2rem;">
+        <img id="detail-image" src="" alt="" style="width:100%;max-height:420px;object-fit:cover;border-radius:12px;margin-bottom:1.5rem;">
+        <span id="detail-category" class="badge badge-primary" style="margin-bottom: 1rem;"></span>
+        <p id="detail-date" style="color: var(--text-muted); margin-bottom: 1rem;"></p>
+        <h1 id="detail-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;"></h1>
+        <div id="detail-content" style="color: var(--text-main); line-height: 1.8; font-size: 1.05rem;"></div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="grid-3">
+        <div>
+          <h3 style="margin-bottom: 1rem;">MPK SMKN 1 Bantul</h3>
+          <p style="color: var(--text-muted);">"Beraspirasi, Berrepresentasi, Berintegritas."</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 1rem;">Tautan Cepat</h4>
+          <ul style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><a href="profil.html" style="color: var(--text-muted);">Profil Organisasi</a></li>
+            <li><a href="berita.html" style="color: var(--text-muted);">Berita Terkini</a></li>
+            <li><a href="saran.html" style="color: var(--text-muted);">Kotak Aspirasi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 1rem;">Kontak</h4>
+          <p style="color: var(--text-muted);">Jl. Sabdodadi, Keyongan, Sabdodadi, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55715</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MPK SMK Negeri 1 Bantul. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/berita-detail.js"></script>
+</body>
+</html>

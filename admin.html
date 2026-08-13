@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin MPK - SMK Negeri 1 Bantul</title>
+  <meta name="description" content="Panel admin untuk mengelola konten MPK SMK Negeri 1 Bantul.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="assets/icons/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="nav">
+      <div class="container navbar">
+      <a href="index.html" class="brand">
+        <img src="assets/icons/logo.png" alt="Logo MPK SMKN 1 Bantul" class="brand-logo">
+        <span>SMKN 1 Bantul</span>
+      </a>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="profil.html" class="nav-link">Profil</a>
+        <a href="berita.html" class="nav-link">Berita</a>
+        <a href="admin.html" class="nav-link active">Admin</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme"></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle Navigation">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  </header>
+
+  <!-- ============ LOGIN SCREEN ============ -->
+  <div class="admin-login-wrap" id="admin-login-wrap">
+    <div class="card admin-login-card reveal">
+      <div class="card-body">
+        <span class="badge badge-primary" style="margin-bottom: 1rem;">Panel Admin</span>
+        <h2 style="margin-bottom: 0.5rem;">Masuk Admin</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Khusus pengurus MPK yang memiliki akun. Akun dibuat oleh super-admin lewat Supabase Dashboard.</p>
+
+        <div id="admin-config-warning" style="display:none; background:#fef3c7; color:#92400e; padding:0.85rem 1rem; border-radius:8px; margin-bottom:1.25rem; font-size:0.85rem;">
+          ⚠️ Supabase belum dikonfigurasi. Isi <code>SUPABASE_URL</code> dan <code>SUPABASE_ANON_KEY</code> di <code>js/supabase-config.js</code> terlebih dahulu.
+        </div>
+
+        <form id="admin-login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email</label>
+            <input class="form-control" id="login-email" type="email" placeholder="admin@sekolah.sch.id" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="login-password">Kata Sandi</label>
+            <input class="form-control" id="login-password" type="password" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <div id="admin-login-error" style="color: var(--danger); font-size: 0.85rem; margin-bottom: 1rem; display:none;"></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;" id="admin-login-btn">Masuk</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ADMIN DASHBOARD (setelah login) ============ -->
+  <div class="admin-shell" id="admin-shell">
+    <section style="padding-top: 2.5rem;">
+      <div class="container">
+
+        <div class="admin-userbar">
+          <div>
+            <h1 style="font-size: 1.8rem; margin-bottom: 0.25rem;">Panel Admin MPK</h1>
+            <p style="color: var(--text-muted);" id="admin-user-email"></p>
+          </div>
+          <button class="btn btn-secondary" id="admin-logout-btn">Keluar</button>
+        </div>
+
+        <div class="grid-4" style="margin-bottom: 2rem;">
+          <div class="card"><div class="card-body" style="text-align:center;">
+            <h3 class="card-title">Berita</h3>
+            <p id="metric-berita" style="font-size:1.8rem; font-weight:800; color: var(--primary);">0</p>
+          </div></div>
+          <div class="card"><div class="card-body" style="text-align:center;">
+            <h3 class="card-title">Aspirasi</h3>
+            <p id="metric-aspirasi" style="font-size:1.8rem; font-weight:800; color: var(--primary);">0</p>
+          </div></div>
+          <div class="card"><div class="card-body" style="text-align:center;">
+            <h3 class="card-title">Diskusi</h3>
+            <p id="metric-diskusi" style="font-size:1.8rem; font-weight:800; color: var(--primary);">0</p>
+          </div></div>
+          <div class="card"><div class="card-body" style="text-align:center;">
+            <h3 class="card-title">Pengurus</h3>
+            <p id="metric-pengurus" style="font-size:1.8rem; font-weight:800; color: var(--primary);">0</p>
+          </div></div>
+        </div>
+
+        <div class="admin-tabs" id="admin-tabs">
+          <button class="admin-tab-btn active" data-tab="berita">📰 Berita</button>
+          <button class="admin-tab-btn" data-tab="agenda">📅 Agenda</button>
+          <button class="admin-tab-btn" data-tab="pengurus">👥 Pengurus</button>
+          <button class="admin-tab-btn" data-tab="aspirasi">💬 Aspirasi</button>
+          <button class="admin-tab-btn" data-tab="diskusi">🗣️ Diskusi</button>
+          <button class="admin-tab-btn" data-tab="unduhan">📄 Unduhan</button>
+        </div>
+
+        <!-- ===== TAB: BERITA ===== -->
+        <div class="admin-panel active" id="panel-berita">
+          <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+              <h3 class="card-title" id="berita-form-title">Tambah Berita Baru</h3>
+              <form id="form-berita">
+                <input type="hidden" id="berita-id">
+                <div class="form-group">
+                  <label class="form-label">Judul Berita</label>
+                  <input class="form-control" id="berita-title" type="text" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Kategori</label>
+                  <select class="form-control" id="berita-category">
+                    <option value="Kegiatan">Kegiatan</option>
+                    <option value="Organisasi">Organisasi</option>
+                    <option value="Informasi">Informasi</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Isi Berita</label>
+                  <textarea class="form-control" id="berita-content" rows="6" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Gambar Berita (PNG/JPG)</label>
+                  <div class="file-preview-row">
+                    <img id="berita-image-preview" class="admin-thumb" src="assets/icons/logo.png" alt="preview">
+                    <input class="form-control" id="berita-image-file" type="file" accept="image/*">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="berita-submit-btn">Simpan Berita</button>
+                <button type="button" class="btn btn-secondary" id="berita-cancel-edit" style="display:none;">Batal Edit</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Daftar Berita</h3>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead><tr><th>Gambar</th><th>Judul</th><th>Kategori</th><th>Tanggal</th><th>Aksi</th></tr></thead>
+                  <tbody id="list-berita"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: AGENDA ===== -->
+        <div class="admin-panel" id="panel-agenda">
+          <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+              <h3 class="card-title" id="agenda-form-title">Tambah Agenda Baru</h3>
+              <form id="form-agenda">
+                <input type="hidden" id="agenda-id">
+                <div class="form-group">
+                  <label class="form-label">Judul Kegiatan</label>
+                  <input class="form-control" id="agenda-title" type="text" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tanggal</label>
+                  <input class="form-control" id="agenda-date" type="date" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Lokasi (opsional)</label>
+                  <input class="form-control" id="agenda-location" type="text">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Deskripsi</label>
+                  <textarea class="form-control" id="agenda-description" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="agenda-submit-btn">Simpan Agenda</button>
+                <button type="button" class="btn btn-secondary" id="agenda-cancel-edit" style="display:none;">Batal Edit</button>
+              </form>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Daftar Agenda</h3>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead><tr><th>Tanggal</th><th>Judul</th><th>Lokasi</th><th>Aksi</th></tr></thead>
+                  <tbody id="list-agenda"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: PENGURUS ===== -->
+        <div class="admin-panel" id="panel-pengurus">
+          <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+              <h3 class="card-title" id="pengurus-form-title">Tambah Anggota Pengurus</h3>
+              <form id="form-pengurus">
+                <input type="hidden" id="pengurus-id">
+                <div class="form-group">
+                  <label class="form-label">Nama</label>
+                  <input class="form-control" id="pengurus-nama" type="text" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Jabatan</label>
+                  <input class="form-control" id="pengurus-jabatan" type="text" placeholder="Contoh: Ketua MPK" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Deskripsi Singkat (opsional)</label>
+                  <input class="form-control" id="pengurus-deskripsi" type="text">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Urutan Tampil</label>
+                  <input class="form-control" id="pengurus-urutan" type="number" value="0">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Foto (ganti/upload)</label>
+                  <div class="file-preview-row">
+                    <img id="pengurus-foto-preview" class="admin-thumb admin-thumb-round" src="assets/icons/logo.png" alt="preview">
+                    <input class="form-control" id="pengurus-foto-file" type="file" accept="image/*">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="pengurus-submit-btn">Simpan Pengurus</button>
+                <button type="button" class="btn btn-secondary" id="pengurus-cancel-edit" style="display:none;">Batal Edit</button>
+              </form>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Daftar Pengurus</h3>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead><tr><th>Foto</th><th>Nama</th><th>Jabatan</th><th>Urutan</th><th>Aksi</th></tr></thead>
+                  <tbody id="list-pengurus"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: ASPIRASI ===== -->
+        <div class="admin-panel" id="panel-aspirasi">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Kotak Aspirasi & Saran Masuk</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1rem;">Ubah status untuk menandai aspirasi yang sudah ditindaklanjuti.</p>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead><tr><th>Nama</th><th>Kelas</th><th>Kategori</th><th>Isi</th><th>Status</th><th>Aksi</th></tr></thead>
+                  <tbody id="list-aspirasi"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: DISKUSI ===== -->
+        <div class="admin-panel" id="panel-diskusi">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Moderasi Forum Diskusi</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1rem;">Hapus topik atau balasan yang tidak sesuai.</p>
+              <div id="list-diskusi"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: UNDUHAN ===== -->
+        <div class="admin-panel" id="panel-unduhan">
+          <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+              <h3 class="card-title">Tambah Dokumen Unduhan</h3>
+              <form id="form-unduhan">
+                <div class="form-group">
+                  <label class="form-label">Judul Dokumen</label>
+                  <input class="form-control" id="unduhan-title" type="text" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Deskripsi</label>
+                  <input class="form-control" id="unduhan-description" type="text">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">File Dokumen (PDF/DOCX/dll)</label>
+                  <input class="form-control" id="unduhan-file" type="file" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="unduhan-submit-btn">Unggah Dokumen</button>
+              </form>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Daftar Unduhan</h3>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead><tr><th>Judul</th><th>File</th><th>Aksi</th></tr></thead>
+                  <tbody id="list-unduhan"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="grid-3">
+        <div>
+          <h3 style="margin-bottom: 1rem;">MPK SMKN 1 Bantul</h3>
+          <p style="color: var(--text-muted);">"Beraspirasi, Berrepresentasi, Berintegritas."</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 1rem;">Tautan Cepat</h4>
+          <ul style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><a href="profil.html" style="color: var(--text-muted);">Profil Organisasi</a></li>
+            <li><a href="berita.html" style="color: var(--text-muted);">Berita Terkini</a></li>
+            <li><a href="saran.html" style="color: var(--text-muted);">Kotak Aspirasi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 1rem;">Kontak</h4>
+          <p style="color: var(--text-muted);">Jl. Sabdodadi, Keyongan, Sabdodadi, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55715</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MPK SMK Negeri 1 Bantul. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
